@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strings"
 	"encoding/json"
-	"time"
 	"errors"
 )
 
@@ -49,13 +48,13 @@ func LogData(t LogType, message string, data interface{}) error {
 	}
 	
 	//Escape \n
-	tmsg := strings.Replace(message, "\n", "\\n")
+	tmsg := strings.Replace(message, "\n", "\\n", -1)
 	
 	//Turn type into string
 	lt := GetTypeName(t)
 
 	//Get current time string
-	t, err := NowTime(isUnixTime).String()
+	ti, err := TimeNow(isUnixTime).String()
 	if err != nil {
 		return err
 	}
@@ -63,7 +62,7 @@ func LogData(t LogType, message string, data interface{}) error {
 	//Create logmsg.
 	l := logmsg{
 		lt,
-		t,
+		ti,
 		tmsg,
 		data,
 	}

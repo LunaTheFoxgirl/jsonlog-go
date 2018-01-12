@@ -19,7 +19,7 @@ func TimeNow(isUnix bool) Timestamp {
 // String returns the timestamp as a string
 func (t Timestamp) String() (string, error) {
 	if t.UnixTime {
-		return strconv.Itoa(t.Unix(), nil
+		return strconv.FormatInt(t.t.Unix(), 10), nil
 	}
 	s, err := t.t.MarshalText()
 	if err != nil {
