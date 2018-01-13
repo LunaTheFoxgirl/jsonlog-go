@@ -7,6 +7,6 @@ jsonlog-go logs are structured as follows:
   "unix": "(Unix timestamp)",
   "type": "(log type; info, warning, error or fatal)",
   "timestamp": "(RFC3339 timestamp)",
-  "data": (anything or nil)
 }
 ```
+There's aswell an optional `data` tag that can be any type, including nil.
