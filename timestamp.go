@@ -8,22 +8,20 @@ import (
 // Timestamp is a point in time.
 type Timestamp struct {
 	t time.Time
-	UnixTime bool
 }
 
 // TimeNow creates a new timestamp for the current time.
-func TimeNow(isUnix bool) Timestamp {
-	return Timestamp{ time.Now(), isUnix }
+func TimeNow() Timestamp {
+	return Timestamp{ time.Now() }
 }
 
-// String returns the timestamp as a string
-func (t Timestamp) String() (string, error) {
-	if t.UnixTime {
-		return strconv.FormatInt(t.t.Unix(), 10), nil
-	}
+// String returns the timestamp as a string.
+// first value is the RFC3339 version.
+// second value is UNIX time version.
+func (t Timestamp) String() (string, string, error) {
 	s, err := t.t.MarshalText()
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
-	return string(s), nil
+	return string(s), strconv.FormatInt(t.t.Unix(), 10), nil
 }
